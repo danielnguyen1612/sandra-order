@@ -3,7 +3,8 @@ namespace App\Http\Controllers;
 
 
 use Illuminate\Http\Request;
-use PDF;
+use Mpdf\Mpdf;
+use Mpdf\MpdfException;
 
 class ExportController extends Controller
 {
@@ -13,8 +14,15 @@ class ExportController extends Controller
             'items' => $request->post('items'),
             'date'  => date('Y/m/d'),
         ];
-        $pdf = PDF::loadView('pdf-view', $data);
-        $date = date('Ymd');
-        return $pdf->download("order_$date.pdf");
+
+        try {
+            $mpdf = new Mpdf();
+            $mpdf->debug = true;
+            $view = view('pdf-view', $data)->render();
+            $mpdf->WriteHTML($view);
+            $mpdf->Output();
+        } catch (MpdfException $e) {
+            dd($e);
+        }
     }
 }

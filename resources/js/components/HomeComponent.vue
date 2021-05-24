@@ -128,8 +128,9 @@ export default {
       this.loading = true;
       try {
         const response = await axios.post('/export', {
-          items: this.items,
-          responseType: 'blob', // important
+          items: this.items
+        }, {
+          responseType: 'blob'
         });
 
         const timestamp = moment().format('YYYYMMDD');
