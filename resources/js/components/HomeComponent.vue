@@ -50,6 +50,9 @@
                 <th class="text-left">
                   Items
                 </th>
+                <th class="text-left">
+                  Notes
+                </th>
                 <th class="text-left">Actions</th>
               </tr>
               </thead>
@@ -63,6 +66,17 @@
                   <ul>
                     <li v-for="text in item.textItems" :key="text">{{ text }}</li>
                   </ul>
+                </td>
+                <td>
+                  <v-textarea
+                    :auto-grow="true"
+                    class="mx-2"
+                    label="Notes"
+                    rows="1"
+                    prepend-icon="mdi-comment"
+                    :value="item.notes"
+                    @change="noteChanged(idx, $event)"
+                  ></v-textarea>
                 </td>
                 <td>
                   <v-btn
@@ -117,6 +131,13 @@ export default {
       if (!res) return;
 
       this.$store.commit('REMOVE_ITEM', index);
+    },
+
+    noteChanged(idx, val) {
+      this.$store.commit('UPDATE_NOTES', {
+        idx,
+        val
+      });
     },
 
     async generatePDF() {

@@ -65,6 +65,7 @@
     <tr class="colhead">
         <th>#</th>
         <th>Items</th>
+        <th>Notes</th>
     </tr>
     @foreach($items as $idx => $item)
         <tr>
@@ -76,6 +77,7 @@
                     @endforeach
                 </ul>
             </td>
+            <td>{{ $item['notes'] ?? '' }}</td>
         </tr>
     @endforeach
 </table>
