@@ -34,7 +34,7 @@
           >
             <v-icon>mdi-close</v-icon>
           </v-btn>
-          <v-toolbar-title>Add new group of items</v-toolbar-title>
+          <v-toolbar-title>{{ edit === null ? 'Add new' : 'Edit' }} group of items</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-toolbar-items>
             <v-btn
@@ -158,7 +158,16 @@
 
 <script>
 import { v4 as uuid } from 'uuid'
+import { mapGetters } from 'vuex';
+
 export default {
+  computed: {
+    ...mapGetters({
+      edit: 'itemEdit',
+      storeItems: 'getItems',
+    })
+  },
+
   data() {
     return {
       valid: true,
@@ -224,6 +233,15 @@ export default {
     }
   },
 
+  watch: {
+    edit: function(newVal, oldVal) {
+      if (newVal !== null) {
+        this.items = [...JSON.parse(JSON.stringify(this.storeItems[newVal].items))];
+        this.dialog = true;
+      }
+    }
+  },
+
   methods: {
     confirm() {
       if (!this.$refs.form.validate()) {
@@ -250,10 +268,11 @@ export default {
       this.items.splice(idx, 1);
     },
 
-    dialogClose() {
+    async dialogClose() {
       this.items = [];
       this.$refs.form.reset();
       this.dialog = false;
+      await this.$store.commit('CANCEL_EDIT');
     },
 
     async addItem() {
@@ -262,10 +281,21 @@ export default {
         return;
       }
 
-      await this.$store.commit('ADD_ITEM', {
-        key: uuid(),
-        items: [...this.items],
-      });
+      if (this.edit === null) {
+        // Create
+        await this.$store.commit('ADD_ITEM', {
+          key: uuid(),
+          items: [...this.items],
+        });
+      } else {
+        await this.$store.commit('UPDATE_ITEM', {
+          idx: this.edit,
+          data: {
+            key: uuid(),
+            items: [...this.items],
+          }
+        });
+      }
 
       this.dialogClose();
     }

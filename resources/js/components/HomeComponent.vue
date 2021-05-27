@@ -27,6 +27,17 @@
 
           <v-scale-transition>
             <v-btn
+              color="red"
+              class="mr-3"
+              @click="resetItems"
+            >
+              <v-icon class="mr-2">mdi-reload-alert</v-icon>
+              Reset
+            </v-btn>
+          </v-scale-transition>
+
+          <v-scale-transition>
+            <v-btn
               color="primary"
               @click="generatePDF"
               :loading="loading"
@@ -79,14 +90,41 @@
                   ></v-textarea>
                 </td>
                 <td>
-                  <v-btn
-                    icon
-                    color="red darken-4"
-                    @click="removeItem(idx)"
+                  <v-tooltip
+                    bottom
                     v-if="!loading"
                   >
-                    <v-icon>mdi-trash-can</v-icon>
-                  </v-btn>
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-btn
+                        icon
+                        color="light-blue"
+                        v-bind="attrs"
+                        v-on="on"
+                        @click="editItem(idx)"
+                      >
+                        <v-icon>mdi-file-edit-outline</v-icon>
+                      </v-btn>
+                    </template>
+                    <span>Edit</span>
+                  </v-tooltip>
+
+                  <v-tooltip
+                    bottom
+                    v-if="!loading"
+                  >
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-btn
+                        icon
+                        color="red darken-4"
+                        v-bind="attrs"
+                        v-on="on"
+                        @click="removeItem(idx)"
+                      >
+                        <v-icon>mdi-trash-can</v-icon>
+                      </v-btn>
+                    </template>
+                    <span>Remove</span>
+                  </v-tooltip>
                 </td>
               </tr>
               <tr v-if="!items.length">
@@ -133,6 +171,19 @@ export default {
       this.$store.commit('REMOVE_ITEM', index);
     },
 
+    async resetItems() {
+      const res = await this.$confirm("Do you really want to reset these items ?", {
+        color: "primary",
+      });
+      if (!res) return;
+
+      this.$store.commit('RESET_ITEMS');
+    },
+
+    editItem(idx) {
+      this.$store.commit('EDIT_ITEM', idx);
+    },
+
     noteChanged(idx, val) {
       this.$store.commit('UPDATE_NOTES', {
         idx,
@@ -162,7 +213,6 @@ export default {
         document.body.appendChild(link);
         link.click();
         this.$toast.success('The PDF file has been generated and downloaded!');
-        this.$store.commit('RESET_ITEMS');
       } catch(e) {
         this.$toast.error('An error occurred, please try again!');
       }
