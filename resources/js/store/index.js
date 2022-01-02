@@ -20,7 +20,7 @@ const store = new Vuex.Store({
       state.items = [...state.items, {
         ...data,
         notes: '',
-        textItems: data.items.map(v => `${v.quantity} ${v.type} ${v.size} ${v.colors.join(',')}`)
+        textItems: data.items.map(v => `${v.quantity}g, ${v.type}, ${v.size}, ${v.texture}, ${v.colors.join(',')}`)
       }];
     },
 
@@ -44,7 +44,7 @@ const store = new Vuex.Store({
       state.items.splice(idx, 1, {
         ...data,
         notes: '',
-        textItems: data.items.map(v => `${v.quantity} ${v.type} ${v.size} ${v.colors.join(',')}`)
+        textItems: data.items.map(v => `${v.quantity}g, ${v.type}, ${v.size}, ${v.texture}, ${v.colors.join(',')}`)
       });
       state.itemEdit = null;
     },

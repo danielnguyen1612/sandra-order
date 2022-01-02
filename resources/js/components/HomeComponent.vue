@@ -16,7 +16,7 @@
       >
         <v-toolbar flat>
           <v-toolbar-title>
-            Ms. Jackelien - From Sandra with love ❤️
+            Ms Yasmin ❤️ - From Sandra
           </v-toolbar-title>
 
           <v-spacer></v-spacer>
@@ -50,7 +50,7 @@
         </v-toolbar>
         <v-divider></v-divider>
         <v-card-text>
-          <h3>List of groups</h3>
+          <h3>List of items</h3>
           <v-simple-table>
             <template v-slot:default>
               <thead>
@@ -128,7 +128,7 @@
                 </td>
               </tr>
               <tr v-if="!items.length">
-                <td colspan="5" class="text-center blue-grey--text lighten-2">No group</td>
+                <td colspan="5" class="text-center blue-grey--text lighten-2">No item</td>
               </tr>
               </tbody>
             </template>
@@ -193,7 +193,7 @@ export default {
 
     async generatePDF() {
       if (!this.items.length) {
-        this.$toast.error('You should add group at first!');
+        this.$toast.error('You should add item at first!');
         return false;
       }
 

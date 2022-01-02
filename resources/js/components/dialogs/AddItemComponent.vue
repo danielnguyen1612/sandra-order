@@ -18,7 +18,7 @@
           v-on="on"
         >
           <v-icon>mdi-plus</v-icon>
-          Add group
+          Add item
         </v-btn>
       </template>
 
@@ -34,7 +34,7 @@
           >
             <v-icon>mdi-close</v-icon>
           </v-btn>
-          <v-toolbar-title>{{ edit === null ? 'Add new' : 'Edit' }} group of items</v-toolbar-title>
+          <v-toolbar-title>{{ edit === null ? 'Add new' : 'Edit' }} item</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-toolbar-items>
             <v-btn
@@ -70,7 +70,15 @@
                   v-model="form.quantity"
                   :items="quantity"
                   :rules="rules.quantity"
-                  label="Quantity"
+                  label="Quantity (g)"
+                ></v-combobox>
+              </v-row>
+              <v-row>
+                <v-combobox
+                  v-model="form.texture"
+                  :items="textures"
+                  :rules="rules.texture"
+                  label="Texture"
                 ></v-combobox>
               </v-row>
               <v-row>
@@ -119,6 +127,9 @@
                     Quantity
                   </th>
                   <th class="text-left">
+                    Texture
+                  </th>
+                  <th class="text-left">
                     Colors
                   </th>
                   <th class="text-left">&nbsp;</th>
@@ -132,6 +143,7 @@
                   <td>{{ item.type }}</td>
                   <td>{{ item.size }}</td>
                   <td>{{ item.quantity }}</td>
+                  <td>{{ item.texture }}</td>
                   <td>{{ item.colors.join(',') }}</td>
                   <td>
                     <v-btn
@@ -176,6 +188,7 @@ export default {
         type: '',
         size: '',
         quantity: '',
+        texture: '',
         colors: [],
       },
       rules: {
@@ -191,15 +204,25 @@ export default {
           v => !!v || 'Quantity is required',
           v => Number(v) > 0 || 'Quantity is not valid'
         ],
+        texture: [
+          v => !!v || 'Texture is required',
+          v => this.textures.includes(v) || 'Texture is not valid'
+        ],
         colors: [
           v => !!v.length || 'You should choose at least one color',
           v => v.every(item => this.colors.includes(item)) || 'Some of selected colors are not valid'
         ]
       },
+      textures: [
+        'Straight',
+        'Wavy',
+        'Curly',
+      ],
       types: [
-        'SD',
-        'DD',
-        'Frontal',
+        'Bulk',
+        'Weft',
+        'Tape',
+        'Tip',
         'Clip In',
         'Ponytail',
         'Halo',
@@ -225,7 +248,7 @@ export default {
         "40\" (100cm)",
         "12"
       ],
-      quantity: Array.from(Array(20).keys()).map(v => v + 1),
+      quantity: Array.from(Array(14).keys()).map((v, idx) => 100 + (idx * 50)),
       colors: [
         "#1", "#1A", "#1B", "Grey", "#2", "#3", "#4", "#6", "#8", "#5Q", "#6C", "#9C", "#12C", "#18C", "#8H", "#32H", "#33H", "#18", "#22", "#14", "#16", "#24",
         "#613", "#613Q", "#60", "#60C", "#2H", "#2Q", "#3Q", "#4Q", "#12", "#27", "Red", ".", "#1H", "1b", "613 ASH", "60 ASH",
@@ -255,6 +278,7 @@ export default {
         size: this.form.size,
         quantity: this.form.quantity,
         colors: this.form.colors,
+        texture: this.form.texture,
       })
 
       this.$refs.form.reset();
