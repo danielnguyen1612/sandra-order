@@ -205,6 +205,9 @@ export default {
         'Halo',
         'Genius Weft',
         'Seamless Clip In',
+        'Long Tape',
+        'Invisible Tape',
+        'Full Lace Wigs',
       ],
       sizes: [
         "6\" (15cm)",
