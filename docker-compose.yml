@@ -1,0 +1,15 @@
+version: '3.1'
+# define all services
+services:
+  app:
+    image: anhnguyentb90/php-apache
+    container_name: sandra_app
+    volumes:
+      - ./:/srv/www
+    ports:
+      - "8787:80"
+    networks:
+      - sandra-net
+networks:
+  sandra-net:
+    driver: bridge
