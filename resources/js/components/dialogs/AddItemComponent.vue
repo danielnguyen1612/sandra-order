@@ -59,6 +59,14 @@
               </v-row>
               <v-row>
                 <v-combobox
+                  v-model="form.type2"
+                  :items="types2"
+                  :rules="rules.type2"
+                  label="Type 2"
+                ></v-combobox>
+              </v-row>
+              <v-row>
+                <v-combobox
                   v-model="form.size"
                   :items="sizes"
                   :rules="rules.size"
@@ -174,6 +182,7 @@ export default {
       dialog: false,
       form: {
         type: '',
+        type2: '',
         size: '',
         quantity: '',
         colors: [],
@@ -182,6 +191,10 @@ export default {
         type: [
           v => !!v || 'Type is required',
           v => this.types.includes(v) || 'Type is not valid'
+        ],
+        type2: [
+          v => !!v || 'Type 2 is required',
+          v => this.types2.includes(v) || 'Type2 is not valid'
         ],
         size: [
           v => !!v || 'Size is required',
@@ -208,6 +221,11 @@ export default {
         'Long Tape',
         'Invisible Tape',
         'Full Lace Wigs',
+      ],
+      types2: [
+        'Ombre',
+        'Piano',
+        'Ombre/ Piano'
       ],
       sizes: [
         "6\" (15cm)",
@@ -257,6 +275,7 @@ export default {
       this.items.splice(0, 0, {
         key: uuid(),
         type: this.form.type,
+        type2: this.form.type2,
         size: this.form.size,
         quantity: this.form.quantity,
         colors: this.form.colors,
