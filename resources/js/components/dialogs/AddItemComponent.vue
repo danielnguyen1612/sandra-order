@@ -221,6 +221,11 @@ export default {
         'Long Tape',
         'Invisible Tape',
         'Full Lace Wigs',
+        'Mono Topper 3x5',
+        'Mono Topper 5x6',
+        'Silk Base 4x4',
+        'Silk Base 5x5',
+        'Seamless Clip In',
       ],
       types2: [
         'Ombre',
@@ -251,7 +256,8 @@ export default {
       quantity: Array.from(Array(20).keys()).map(v => v + 1),
       colors: [
         "#1", "#1A", "#1B", "Grey", "#2", "#3", "#4", "#6", "#8", "#5Q", "#6C", "#9C", "#12C", "#18C", "#8H", "#32H", "#33H", "#18", "#22", "#14", "#16", "#24",
-        "#613", "#613Q", "#60", "#60C", "#2H", "#2Q", "#3Q", "#4Q", "#12", "#27", "Red", ".", "#1H", "1b", "613 ASH", "60 ASH", '3C', '4C', '5C', '6Q', '7Q',
+        "#613", "#613Q", "#60", "#60C", "#2H", "#2Q", "#3Q", "#4Q", "#12", "#27", "Red", ".", "#1H", "1b", "613 ASH", "60 ASH", '1C', '3C', '4C', '5C', '6Q', '7Q',
+        '6.1', '6.2', '34',
       ],
       items: [],
     }
