@@ -228,6 +228,7 @@ export default {
         'Seamless Clip In',
       ],
       types2: [
+        'Normal',
         'Ombre',
         'Piano',
         'Ombre/ Piano'
