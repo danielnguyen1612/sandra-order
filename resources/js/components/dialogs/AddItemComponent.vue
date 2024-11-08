@@ -201,8 +201,7 @@ export default {
           v => this.sizes.includes(v) || 'Type is not valid'
         ],
         quantity: [
-          v => !!v || 'Quantity is required',
-          v => Number(v) > 0 || 'Quantity is not valid'
+          v => !!v || 'Quantity is required'
         ],
         colors: [
           v => !!v.length || 'You should choose at least one color',
