@@ -75,6 +75,13 @@
               </v-row>
               <v-row>
                 <v-combobox
+                  v-model="form.capSize"
+                  :items="capSizes"
+                  label="Wig Cap Size"
+                ></v-combobox>
+              </v-row>
+              <v-row>
+                <v-combobox
                   v-model="form.quantity"
                   :items="quantity"
                   :rules="rules.quantity"
@@ -124,6 +131,9 @@
                     Size
                   </th>
                   <th class="text-left">
+                    Wig Cap Size
+                  </th>
+                  <th class="text-left">
                     Quantity
                   </th>
                   <th class="text-left">
@@ -139,6 +149,7 @@
                 >
                   <td>{{ item.type }}</td>
                   <td>{{ item.size }}</td>
+                  <td>{{ item.capSize }}</td>
                   <td>{{ item.quantity }}</td>
                   <td>{{ item.colors.join(',') }}</td>
                   <td>
@@ -184,6 +195,7 @@ export default {
         type: '',
         type2: '',
         size: '',
+        capSize: '',
         quantity: '',
         colors: [],
       },
@@ -226,13 +238,18 @@ export default {
         'Silk Base 5x5',
         'Seamless Clip In',
         'Full End Wigs',
-        'Wig Cap Size',
       ],
       types2: [
         'Normal',
         'Ombre',
         'Piano',
         'Ombre/ Piano'
+      ],
+      capSizes: [
+        "Size S",
+        "Size XS",
+        "Size M",
+        "Size L",
       ],
       sizes: [
         "6\" (15cm)",
@@ -254,10 +271,6 @@ export default {
         "38\" (95cm)",
         "40\" (100cm)",
         "12",
-        "Size S",
-        "Size XS",
-        "Size M",
-        "Size L",
       ],
       quantity: Array.from(Array(20).keys()).map(v => v + 1).concat(...['200 gram', '250 gram', '350 gram', '450gram']),
       colors: [
@@ -289,6 +302,7 @@ export default {
         type: this.form.type,
         type2: this.form.type2,
         size: this.form.size,
+        capSize: this.form.capSize,
         quantity: this.form.quantity,
         colors: this.form.colors,
       })
