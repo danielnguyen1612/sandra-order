@@ -20,7 +20,7 @@ const store = new Vuex.Store({
       state.items = [...state.items, {
         ...data,
         notes: '',
-        textItems: data.items.map(v => `${v.quantity} ${v.type} ${v.type2} ${v.size} ${v.colors.join(',')}`)
+        textItems: data.items.map(v => `${v.quantity} ${v.type} ${v.type2} ${v.size} ${v.capSize} ${v.colors.join(',')}`)
       }];
     },
 
