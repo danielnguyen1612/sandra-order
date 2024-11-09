@@ -226,6 +226,7 @@ export default {
         'Silk Base 5x5',
         'Seamless Clip In',
         'Full End Wigs',
+        'Wig Cap Size',
       ],
       types2: [
         'Normal',
@@ -252,7 +253,11 @@ export default {
         "36\" (90cm)",
         "38\" (95cm)",
         "40\" (100cm)",
-        "12"
+        "12",
+        "Size S",
+        "Size XS",
+        "Size M",
+        "Size L",
       ],
       quantity: Array.from(Array(20).keys()).map(v => v + 1).concat(...['200 gram', '250 gram', '350 gram', '450gram']),
       colors: [
