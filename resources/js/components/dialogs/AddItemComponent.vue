@@ -238,6 +238,7 @@ export default {
         'Silk Base 5x5',
         'Seamless Clip In',
         'Full End Wigs',
+        '13x6 Frontal Wigs',
       ],
       types2: [
         'Normal',
@@ -272,7 +273,7 @@ export default {
         "40\" (100cm)",
         "12",
       ],
-      quantity: Array.from(Array(20).keys()).map(v => v + 1).concat(...['200 gram', '250 gram', '350 gram', '450gram']),
+      quantity: Array.from(Array(20).keys()).map(v => v + 1).concat(...['200 gram', '250 gram', '270gram', '350 gram', '370gram', '450gram', '470gram']),
       colors: [
         "#1", "#1A", "#1B", "Grey", "#2", "#3", "#4", "#6", "#8", "#5Q", "#6C", "#9C", "#12C", "#18C", "#8H", "#32H", "#33H", "#18", "#22", "#14", "#16", "#24",
         "#613", "#613Q", "#60", "#60C", "#2H", "#2Q", "#3Q", "#4Q", "#12", "#27", "Red", ".", "#1H", "1b", "613 ASH", "60 ASH", '1C', '3C', '4C', '5C', '6Q', '7Q',
