@@ -201,14 +201,18 @@ export default {
       try {
         const response = await axios.post('/export', {
           items: this.items
-        }, {
-          responseType: 'blob'
         });
 
+        const { success, file, message } = response.data
+
+        if (!success) {
+          throw new Error(message)
+        }
+
         const timestamp = moment().format('YYYYMMDD');
-        const url = window.URL.createObjectURL(new Blob([response.data]));
+        // const url = window.URL.createObjectURL(new Blob([response.data]));
         const link = document.createElement('a');
-        link.href = url;
+        link.href = [window.location.href, 'orders', file].join('/');
         link.setAttribute('download', `order_${timestamp}.pdf`); //or any other extension
         document.body.appendChild(link);
         link.click();

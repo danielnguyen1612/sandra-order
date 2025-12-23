@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Mpdf\Mpdf;
 use Mpdf\MpdfException;
+use Mpdf\Output\Destination;
+use Illuminate\Support\Facades\Log;
 
 class ExportController extends Controller
 {
@@ -15,14 +17,31 @@ class ExportController extends Controller
             'date'  => date('Y/m/d'),
         ];
 
+        $date = date('Y-m-d');
+
         try {
             $mpdf = new Mpdf();
             $mpdf->debug = true;
             $view = view('pdf-view', $data)->render();
             $mpdf->WriteHTML($view);
-            $mpdf->Output();
+            $fileName = implode('', ['order_', $date, '-', time(), '.pdf']);
+            $mpdf->Output(
+                public_path("orders/$fileName"),
+                Destination::FILE
+            );
+
+            response()->json([
+                'success' => true,
+                'file' => $fileName
+            ]);
         } catch (MpdfException $e) {
-            dd($e);
+            Log::error("Failed to generate PDF", [
+                'exception' => $e,
+            ]);
+            response()->json([
+                'success' => false,
+                'error' => $e->getMessage(),
+            ]);
         }
     }
 }
