@@ -30,7 +30,7 @@ class ExportController extends Controller
                 Destination::FILE
             );
 
-            response()->json([
+            return response()->json([
                 'success' => true,
                 'file' => $fileName
             ]);
@@ -38,7 +38,7 @@ class ExportController extends Controller
             Log::error("Failed to generate PDF", [
                 'exception' => $e,
             ]);
-            response()->json([
+            return response()->json([
                 'success' => false,
                 'error' => $e->getMessage(),
             ]);
