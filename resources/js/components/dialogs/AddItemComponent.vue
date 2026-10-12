@@ -236,7 +236,10 @@ export default {
         'Normal',
         'Ombre',
         'Piano',
-        'Ombre/ Piano'
+        'Ombre/ Piano',
+        'Ombre',
+        'Balayage',
+        'Thin piano',
       ],
       capSizes: [
         "Size S",
